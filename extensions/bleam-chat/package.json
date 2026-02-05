@@ -1,0 +1,74 @@
+{
+  "name": "bleam-chat",
+  "displayName": "Bleam Chat",
+  "description": "Built-in chat participant that connects to an OpenAI-compatible endpoint.",
+  "version": "0.1.0",
+  "publisher": "bleam",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.103.0"
+  },
+  "categories": [
+    "AI"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "bleam.chat",
+        "name": "bleam",
+        "fullName": "Bleam Assistant",
+        "description": "Bleam's built-in assistant for code, docs, and troubleshooting.",
+        "isDefault": true,
+        "sampleRequest": "Summarize the key files in this workspace."
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Bleam Chat",
+      "properties": {
+        "bleamChat.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI-compatible API key used for chat requests. Can also be provided via the BLEAM_CHAT_API_KEY environment variable."
+        },
+        "bleamChat.baseUrl": {
+          "type": "string",
+          "default": "https://api.openai.com/v1",
+          "description": "Base URL for the OpenAI-compatible API (for example, https://api.openai.com/v1 or http://localhost:11434/v1)."
+        },
+        "bleamChat.model": {
+          "type": "string",
+          "default": "gpt-4o-mini",
+          "description": "Model name to request from the OpenAI-compatible API."
+        },
+        "bleamChat.temperature": {
+          "type": "number",
+          "default": 0.2,
+          "minimum": 0,
+          "maximum": 2,
+          "description": "Sampling temperature for chat completions."
+        },
+        "bleamChat.maxTokens": {
+          "type": "number",
+          "default": 1024,
+          "minimum": 1,
+          "description": "Maximum tokens to generate for a response."
+        },
+        "bleamChat.systemPrompt": {
+          "type": "string",
+          "default": "You are Bleam, a helpful coding assistant.",
+          "description": "System prompt prepended to each request."
+        },
+        "bleamChat.includeHistory": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include chat history when sending requests to the model."
+        }
+      }
+    }
+  }
+}
